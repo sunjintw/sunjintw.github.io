@@ -31,7 +31,10 @@
             myDataRef.set(json);
         });
     }
-
-
-
+    function openAddModal() {
+        $('#add_modal').openModal();
+    }
 })(jQuery); // end of jQuery name space
+
+
+
