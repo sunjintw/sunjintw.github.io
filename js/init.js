@@ -1,6 +1,8 @@
 (function($) {
     $(function() {
-        var myDataRef = new Firebase('https://torrid-heat-9808.firebaseio.com/');
+        // var myDataRef = new Firebase('https://torrid-heat-9808.firebaseio.com/');
+        var myDataRef = new Wilddog("https://blackhospital.wilddogio.com/");
+        // addDataFromGit(myDataRef);
         myDataRef.on("value", function(snapshot) {
             initJETS(snapshot.val());
         }, function(errorObject) {
@@ -19,9 +21,8 @@
         });
     }
 
-    function addDataFromGit() {
+    function addDataFromGit(myDataRef) {
         $.getJSON("https://raw.githubusercontent.com/sunjintw/docs/master/hospitals.json", function(json) {
-            var myDataRef = new Firebase('https://torrid-heat-9808.firebaseio.com/');
             myDataRef.on("value", function(snapshot) {
                 console.log(snapshot.val());
             }, function(errorObject) {
@@ -30,5 +31,7 @@
             myDataRef.set(json);
         });
     }
+
+
 
 })(jQuery); // end of jQuery name space
