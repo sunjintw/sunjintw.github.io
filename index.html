@@ -17,13 +17,20 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
     <script src="js/init.js"></script>
+    <script type="text/javascript">
+      function openAddModal(){
+        $('#add_modal').openModal();
+      }
+    </script>
 </head>
 
 <body>
     <nav class="red lighten-1" role="navigation">
         <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Fuck Baidu</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="#"></a></li>
+                <li>
+                    <a href="#"></a>
+                </li>
             </ul>
             <ul id="nav-mobile" class="side-nav">
                 <li><a href="#">Navbar Link</a></li>
@@ -46,23 +53,45 @@
                         <input class="validate" type="text" id="jetsSearch">
                     </div>
                     <div class="col l8 m8 s6">
-                    <a class="btn-large waves-effect waves-light red right" id="add_hospital"><i class="material-icons left">add</i>添加</a>
-                    </div>
-                    <div class="card-content">
-                        <table class="bordered">
-                            <thead>
-                                <tr>
-                                    <th style="width:80%;">医院</th>
-                                    <th>城市</th>
-                                </tr>
-                            </thead>
-                        </table>
-                        <div style="max-height: 260px; overflow: auto">
-                            <table class="bordered">
-                                <tbody id="jetsContent">
-                                </tbody>
-                            </table>
+                        <!-- Modal Trigger -->
+                        <a class="modal-trigger btn-large waves-effect waves-light red right" onclick="openAddModal()" id="add_hospital"><i class="material-icons left">add</i>添加</a>
+                        <!-- Modal Structure -->
+                        <div id="add_modal" class="modal">
+                            <div class="modal-content">
+                                <h4>添加医院</h4>
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field">
+                                            <label for="hopital">医院</label>
+                                            <input id="hopital_name" type="text" class="validate">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field">
+                                            <label for="location">城市</label>
+                                            <input id="location_name" type="text" class="validate">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                            </div>
                         </div>
+                    </div>
+                    <table class="bordered">
+                        <thead>
+                            <tr>
+                                <th style="width:80%;">医院</th>
+                                <th>城市</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div style="max-height: 260px; overflow: auto">
+                        <table class="bordered striped">
+                            <tbody id="jetsContent">
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
