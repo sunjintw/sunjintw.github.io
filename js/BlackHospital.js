@@ -44,28 +44,36 @@ function initJETS(data) {
 function addHospital() {
     var hospital_name = $('#hospital_name').val();
     var location_name = $('#location_name').val();
-    var is_added = false;
-    var current_locations;
-    myDataRef.once("value", function(snapshot) {
-            current_locations = snapshot.val().locations;
-            $.each(current_locations, function(index, location) {
-                if (location.name == location_name) {
-                    if (($.inArray(hospital_name, location.hospitals)) < 0) {
-                        location.hospitals.push(hospital_name);
+    if(isValid(hospital_name)&&isValid(location_name)){
+        var is_added = false;
+        var current_locations;
+        myDataRef.once("value", function(snapshot) {
+                current_locations = snapshot.val().locations;
+                $.each(current_locations, function(index, location) {
+                    if (location.name == location_name) {
+                        if (($.inArray(hospital_name, location.hospitals)) < 0) {
+                            location.hospitals.push(hospital_name);
+                        }
+                        is_added = true;
+                        return;
                     }
+                });
+                if (!is_added) {
+                    current_locations.push({ name: location_name, hospitals: [hospital_name] });
                     is_added = true;
-                    return;
                 }
+                if (is_added) {
+                    myDataRef.update({ locations: current_locations });
+                }
+            },
+            function(errorObject) {
+                console.log("The read failed: " + errorObject.code);
             });
-            if (!is_added) {
-                current_locations.push({ name: location_name, hospitals: [hospital_name] });
-                is_added = true;
-            }
-            if (is_added) {
-                myDataRef.update({ locations: current_locations });
-            }
-        },
-        function(errorObject) {
-            console.log("The read failed: " + errorObject.code);
-        });
+    } else {
+        alert("不要胡乱输入了~");
+    }
+}
+function isValid(text){
+    var reg = new RegExp('^<([^>\s]+)[^>]*>(.*?<\/\\1>)?$');
+    return reg.test(text);
 }
