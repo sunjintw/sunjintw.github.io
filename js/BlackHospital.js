@@ -2,9 +2,9 @@ var remote_data;
 var myDataRef;
 (function($) {
     $(function() {
-        // var myDataRef = new Firebase('https://torrid-heat-9808.firebaseio.com/');
-        myDataRef = new Wilddog("https://blackhospital.wilddogio.com/");
-        // addDataFromGit(myDataRef);
+        myDataRef = new Firebase('https://blackhospital-abbe3-default-rtdb.firebaseio.com/');
+//         myDataRef = new Wilddog("https://blackhospital.wilddogio.com/");
+        addDataFromGit(myDataRef);
         myDataRef.on("value", function(snapshot) {
             initJETS(snapshot.val());
         }, function(errorObject) {
